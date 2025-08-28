@@ -1,0 +1,6 @@
+expname = trex_test
+basedir = ./logs
+datadir = /teams/microsate_1687685838/qza/dataset/SPE3R/spe3r/soho
+dataset_type = spe3r
+
+
