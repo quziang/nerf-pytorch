@@ -1,6 +1,40 @@
-expname = trex_test
+expname = spe3r_soho
 basedir = ./logs
 datadir = /teams/microsate_1687685838/qza/dataset/SPE3R/spe3r/soho
 dataset_type = spe3r
+
+# SPE3R数据集特定设置
+no_batching = True
+use_viewdirs = True
+white_bkgd = False  
+
+# 采样设置
+N_samples = 64     # 粗糙采样点数
+N_importance = 128 # 精细采样点数  
+N_rand = 1024   # 每次迭代的射线数量
+
+# 学习率设置
+lrate = 2e-4       # 初始学习率
+lrate_decay = 100  # 学习率衰减间隔
+N_iters = 500000   # 训练迭代次数（标准训练）
+
+# 图像分辨率设置
+half_res = False   # 使用完整256x256分辨率
+
+# 预处理设置
+precrop_iters = 500    # 预裁剪迭代次数
+precrop_frac = 0.5     # 预裁剪比例
+
+# NDC设置
+no_ndc = True      # SPE3R不使用NDC坐标系
+
+# 掩码设置
+# no_masks = False   # 默认使用掩码去除背景，取消注释则不使用掩码
+
+# 测试设置
+testskip = 8       # 测试集采样间隔
+
+# 渲染噪声
+raw_noise_std = 1e0
 
 
