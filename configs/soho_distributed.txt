@@ -1,0 +1,43 @@
+expname = spe3r_soho_distributed
+basedir = ./logs
+datadir = /teams/microsate_1687685838/qza/dataset/SPE3R/spe3r/soho
+dataset_type = spe3r
+
+# SPE3R数据集特定设置
+no_batching = True
+use_viewdirs = True
+white_bkgd = False  
+
+# 采样设置 - 多GPU优化
+N_samples = 64        # 粗糙采样点数
+N_importance = 128    # 精细采样点数  
+N_rand = 4096         # 大幅增加batch size (每张GPU处理2048条射线)
+
+# 学习率设置 - 多GPU优化
+lrate = 4e-4          # 增加学习率 (线性缩放规则: 2GPU * 2e-4)
+lrate_decay = 100     # 学习率衰减间隔
+N_iters = 50000      # 减少总迭代次数 (多GPU收敛更快)
+
+# 内存优化
+chunk = 65536     # 增加chunk大小，减少kernel启动开销 1024*64  
+netchunk = 131072   # 增加netchunk，更好利用GPU. 1024*128
+
+# 图像分辨率设置
+half_res = False      # 使用完整256x256分辨率
+
+# 预处理设置 - 减少预裁剪时间
+precrop_iters = 250   # 减少预裁剪迭代次数
+precrop_frac = 0.5    # 预裁剪比例
+
+# NDC设置
+no_ndc = True         # SPE3R不使用NDC坐标系
+
+# 测试设置 - 减少测试频率以专注训练
+testskip = 16         # 增加测试集采样间隔
+i_print = 50          # 减少打印频率
+i_weights = 5000      # 减少保存频率
+i_testset = 25000     # 减少测试集评估频率
+i_video = 25000       # 减少视频生成频率
+
+# 渲染噪声
+raw_noise_std = 1e0
